@@ -224,7 +224,7 @@ $gnuplot --persist charge+3.gplot
 $gnuplot --persist vcharge+3.gplot
 ```
 
-![alt text](/atom/img/all-electron-03.png)   
+![alt text](../img/all-electron-03.png)   
 Left : Core charge / Right : Valence charge
 
 charge density를 비교하면 core charge에서는 큰 차이가 없으나, valence charge가 감소하고,   
@@ -237,7 +237,7 @@ charge density를 비교하면 core charge에서는 큰 차이가 없으나, val
 $cd ../../2.N/
 $gedit n_hund.ae.inp
 ```
-![alt text](/atom/img/all-electron-04.png)  
+![alt text](../img/all-electron-04.png)  
 • ca : 비편극(non-pol) 계산 (스핀 분리 없이 점유수 1개만 입력)  
 • cas : spin-polarized 계산 (각 오비탈 점유수를 up down 두 개로 입력)  
 
@@ -311,7 +311,7 @@ cd ../../3.pb
 ls
 gedit pb_relat.ae.inp pb_non_relat.ae.inp
 ```
-![alt text](/atom/img/all-electron-05.png)   
+![alt text](../img/all-electron-05.png)   
 • ca : 상대론적 효과 고려하지 않는 옵션  
 • car : 상대론적 효과 고려하는 옵션
 ```bash

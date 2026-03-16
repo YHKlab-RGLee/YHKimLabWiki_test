@@ -386,7 +386,7 @@ lattice constant는 Tutorial 1에서와 마찬가지로 일정한 간격으로 l
 계산의 효율을 위해 처음에는 sparse하게 계산한 후 에너지가 가장 낮은 값 근처에서 dense하게 계산하면 좋다. 
 이후 3d 물질에서 lattice constant를 찾기에 적합한 murnaghan fitting을 통해 에너지가 가장 낮은 lattice constant를 찾았다
 
-![lattice_compare](/atom/img/pseudopotential-01.png)
+![lattice_compare](../img/pseudopotential-01.png)
 
 relativistic 효과를 킨 경우 최적화된 volume은 69.28785 Å 이고, 
 relativistic 효과를 끈 경우 최적화된 volume은 79.22283 Å이다. 
@@ -405,7 +405,7 @@ Tutorial 1에서도 사용한 이 band 그래프이다.
 band path는 모두 $\Gamma-X-W-L-\Gamma-K$ 로 설정해준다. 보고싶은 에너지 범위는 $E_F \pm 10\,\mathrm{eV}$이다. 
 이 조건들을 만족시키면서 band 그래프를 그려보면 결과는 다음과 같다.
 
-![band_result](/atom/img/pseudopotential-02.png)
+![band_result](../img/pseudopotential-02.png)
 
 페르미 에너지 위 5eV부분을 보면 relativistic의 band structure은 reference와 비슷하지만, 
 non-relativistic의 band structure은 reference와 상이함을 알 수 있다. 
