@@ -12,12 +12,12 @@ plugins:
         - search
         - mermaid2
         - glightbox
-        - git-revision-date-localized
+        - git-revision-date-localized:
+                enable_parallel_processing: false
 
 extra_javascript:
   - javascripts/config.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
     - attr_list
@@ -27,63 +27,63 @@ markdown_extensions:
     - pymdownx.mark
     - pymdownx.arithmatex:
         generic: true
+validation:
+    links:
+        absolute_links: ignore
 nav:
         - Home: index.md
         - 시작하기:
                 - 1. 원격 개발 환경 구축:
-                        - A. 연구실 클러스터 (HPC) : environment/YHK_cluster.md
-                        - B. Edison (KISTI) Jupyter server : education/DD.md
-                        - C. 로컬:
-                                - 'Linux용 Windows 하위 시스템(WSL)' : environment/wsl2.md
-                                - '파이썬' : environment/python.md
-                                # - '• VSCode' : environment/vscode.md
+                        - A. 연구실 클러스터 (HPC) : getting-started/lab-cluster.md
+                        - B. 로컬 Python (Anaconda) : getting-started/python-setup.md
+                        - C. WSL : getting-started/wsl.md
                 - 2. 버전관리:
-                        - A. Git : github_tutorial/0.github_create_repository.md
+                        - A. Git 저장소 시작하기 : getting-started/git-create-repository.md
                 - 3. 명령어 cheat sheet:
-                        - A. Python : other/1.2_PythonCheatSheet.md
-                        - B. Linux : other/1.1_LinuxCheatSheet.md
-                        - C. Anaconda : other/1.4_AnacondaCheatSheet.md
-                        - D. Emacs : other/1.3_EmacsCheatSheet.md
+                        - A. Python : cheatsheets/python.md
+                        - B. Linux : cheatsheets/linux.md
+                        - C. Anaconda : cheatsheets/anaconda.md
+                        - D. Emacs : cheatsheets/emacs.md
+                        - E. MkDocs : cheatsheets/mkdocs.md
         - 교육용:
-                - Atomic unit: atomic_unit/dimension_analysis.md
-        - OORINano:
-                - 1. k-point sampling : nanocore/nanocore_kpoint.md
-                - 2. Structure optimization :
-                        - A. Equation of state (EOS) : nanocore/nanocore_eos.md
-                        - B. Murnaghan fitting : nanocore/nanocore_murnaghan.md
-                        - C. Geometry optimization : nanocore/nanocore_geo.md
+                - Atomic unit: education/atomic-unit-dimension-analysis.md
         - Atom:
-                - 1. 설치: build/build_atom.md
+                - 1. 설치: installation/atom.md
                 - 2. ATOM 계산:
                         - A. 기초 과정:
-                                - '(1) 모든-전자 계산' : atom/atom_all_electron.md
-                                - '(2) 슈도퍼텐셜 생성' : atom/atom_pseudopotential.md
+                                - '(1) 모든-전자 계산' : atom/all-electron.md
+                                - '(2) 슈도퍼텐셜 생성' : atom/pseudopotential.md
         - SIESTA:
                 - 0. 준비:
-                        - A. SIESTA Edison에서 설치 : build/build_siesta_Edison.md
-                        - B. SIESTA 클러스터에서 설치 : build/build_siesta.md
-                        - C. SIESTA 로컬에서 설치 : build/build_siesta_local.md
+                        - A. SIESTA 클러스터에서 설치 : installation/siesta-cluster.md
+                        - B. SIESTA Edison에서 설치 : installation/siesta-edison.md
+                        - C. SIESTA 로컬에서 설치 : installation/siesta-local.md
                 - 1. SIESTA 계산:
                         - A. 기초 과정:
-                                - (1) SIESTA 개요 : siesta/siesta_basic.md
-                                - (2) CH4, CH3 분자 : siesta/siesta_ch4.md
-                                - (3) 3D - Au bulk 구조 : siesta/siesta_gold_bulk.md
-                                - (4-1) 2D - Au slab 구조: siesta/siesta_gold_slab.md
-                                - (4-2) 2D - Graphene : siesta/siesta_graphene.md
+                                - (1) SIESTA 개요 : siesta/basic.md
+                                - (2) CH4-H20-NH3 : siesta/ch4-h20-nh3.md
+                                - (3) 3D - Au bulk 구조 : siesta/gold-bulk.md
+                                - (4-1) 2D - Au slab 구조: siesta/gold-slab.md
+                                - (4-2) 2D - Graphene : siesta/graphene.md
                 - 2. TranSIESTA 계산:
                         - A. 기초 과정:
-                                - (1) TranSIESTA 개요 : transiesta/transiesta_overview.md
-                                - (2) 접합구조 모델링 : transiesta/transiesta_modeling.md
-                                - (3) Si chain (1D) : transiesta/transiesta_si1d.md
+                                - (1) TranSIESTA 개요 : transiesta/overview.md
+                                - (2) 접합구조 모델링 : transiesta/junction-modeling.md
+                                - (3) Si chain (1D) : transiesta/si-chain-1d.md
                         - B. 중급/고급 과정:
                                 - (1) 평형상태 계산:
-                                        - 1) 그래핀 (2D) : transiesta/transiesta_graphene.md
-                                        - 2) 깨끗한 or 결함있는 GNRs: transiesta/transiesta_gnr.md
-                                        - 3) Si-SiO2-Si : transiesta/transiesta_si-sio2-si.md
+                                        - 1) 그래핀 (2D) : transiesta/graphene.md
+                                        - 2) 깨끗한 or 결함있는 GNRs: transiesta/gnr.md
+                                        - 3) Si-SiO2-Si : transiesta/si-sio2-si.md
                                 - (2) 비평형상태 계산:
-                                        - 1) GNRs-진공-GNRs : transiesta/transiesta_gnr-vacuum-gnr.md
+                                        - 1) GNRs-진공-GNRs : transiesta/gnr-vacuum-gnr.md
         - VASP:
                 - Nudged Elastic Band (NEB):
-                        - Machine learning for nudged elastic band : vasp/ml-neb.md
+                        - Machine learning for nudged elastic band : vasp/machine-learning-neb.md
+        - OORINano:
+                - 1. k-point sampling : nanocore/k-point-sampling.md
+                - 2. Structure optimization :
+                        - A. Equation of state (EOS) : nanocore/equation-of-state.md
+                        - B. Murnaghan fitting : nanocore/murnaghan-fitting.md
+                        - C. Geometry optimization : nanocore/geometry-optimization.md
         - About: about.md
-

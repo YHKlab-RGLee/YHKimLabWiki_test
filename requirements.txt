@@ -1,0 +1,11 @@
+# Install with:
+#   pip install -r requirements.txt
+
+# Core MkDocs site builder
+mkdocs
+
+# Theme configured by `theme.name: material`
+mkdocs-material
+
+# Extensions configured under `markdown_extensions`
+pymdown-extensions
