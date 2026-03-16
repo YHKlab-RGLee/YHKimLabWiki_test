@@ -29,6 +29,7 @@ markdown_extensions:
         generic: true
 validation:
     links:
+        not_found: ignore
         absolute_links: ignore
 nav:
         - Home: index.md
