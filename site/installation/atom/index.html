@@ -2977,12 +2977,8 @@ $<span class="w"> </span>cp<span class="w"> </span>arch.make.sample<span class="
 $<span class="w"> </span>vi<span class="w"> </span>arch.make<span class="w">  </span><span class="c1"># arch.make 파일 편집</span>
 </code></pre></div>
 <code>arch.make</code> 파일이 열리면 아래 부분에 ROOT를 수정한다. path는 '/' root 부터 절대 경로를 쓰고, 리눅스 명령어 <em>$ pwd</em> 로 절대경로를 확인할 수 있다.<p></p>
-<div class="highlight"><pre><span></span><code><span class="nv">XMLF90_ROOT</span><span class="o">=</span><span class="w"> </span>&lt;설치한<span class="w"> </span>xmlf90<span class="w"> </span>위치&gt;/xmlf90-1.5.0/Gfortran
-<span class="nv">GRIDXC_ROOT</span><span class="o">=</span><span class="w"> </span>&lt;설치한<span class="w"> </span>libgridxc<span class="w"> </span>위치&gt;/libgridxc-0.8.5/Gfortran
-include<span class="w"> </span><span class="k">$(</span>XMLF90_ROOT<span class="k">)</span>/xmlf90.mk
-include<span class="w"> </span><span class="k">$(</span>GRIDXC_ROOT<span class="k">)</span>/gridxc.mk
-$<span class="w"> </span>make
-</code></pre></div>
+<p>```bash
+XMLF90_ROOT= &lt;설치한 xmlf90 위치&gt;/xmlf90-1.5.0/Gf</p>
 <ul>
 <li>[x]  <code>atm</code> 생성확인</li>
 </ul>

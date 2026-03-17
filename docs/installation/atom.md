@@ -113,12 +113,9 @@ $ vi arch.make  # arch.make 파일 편집
 `arch.make` 파일이 열리면 아래 부분에 ROOT를 수정한다. path는 '/' root 부터 절대 경로를 쓰고, 리눅스 명령어 *$ pwd* 로 절대경로를 확인할 수 있다.
 
 ```bash
-XMLF90_ROOT= <설치한 xmlf90 위치>/xmlf90-1.5.0/Gfortran
-GRIDXC_ROOT= <설치한 libgridxc 위치>/libgridxc-0.8.5/Gfortran
-include $(XMLF90_ROOT)/xmlf90.mk
-include $(GRIDXC_ROOT)/gridxc.mk
-$ make
-```
+XMLF90_ROOT= <설치한 xmlf90 위치>/xmlf90-1.5.0/Gf
+
+
 
 - [x]  `atm` 생성확인
 

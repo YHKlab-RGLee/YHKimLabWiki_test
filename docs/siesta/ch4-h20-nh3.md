@@ -23,8 +23,35 @@ $ ls
 아래 예시는 대부분 `input/` 폴더가 있는 계산 디렉토리에서 실행한다고 가정한다.  
 즉, `ls`를 했을 때 `input/`과 실행 스크립트가 보이는 위치에서 명령을 입력하면 된다.
 
-### 1.1 `A. SIESTA Edison에서 설치 방식`으로 빌드한 경우
+### 1.1 `A. SIESTA 클러스터에서 설치` 방식으로 빌드한 경우
 
+클러스터 튜토리얼에는 보통 `slm_siesta_run` 같은 제출 스크립트가 함께 들어 있다.
+
+```bash
+$ cd Tutorial/bin
+$ ls
+$ gedit slm_siesta_run
+```
+해당 스크립트에서 실제 siesta가 위치해 있는 위치 혹은 해당 bin에 있는 siesta 경로로 수정해준다.
+```bash
+...
+RUNBIN="(siesta가 실제 있는 위치)"
+...
+```
+계산 방법 예시:  
+계산 하고자 하는 디렉토리에 실행 스크립트를 복사한 뒤 job을 제출한다.
+
+```bash
+$ cp ../../bin/slm_siesta_run .
+$ ls
+$ qsub slm_siesta_run
+```
+
+이 문서의 예시는 대부분 `qsub slm_siesta_run` 기준으로 적혀 있다.  
+Edison 환경에서 진행한다면 같은 자리에서 `python ../bin/run_siesta.py`로 바꿔 실행하면 된다.
+
+
+### 1.2 `B. SIESTA Edison에서 설치` 방식으로 빌드한 경우
 튜토리얼 압축 파일을 풀면 `bin/` 디렉토리에 실행 보조 스크립트가 들어 있다.
 
 ```bash
@@ -54,33 +81,6 @@ $ python ../../bin/run_siesta.py
 ```
 
 실행하면 사용할 코어(MPI rank) 개수를 묻고, 입력한 개수로 계산이 시작된다.
-
-### 1.2 `B. SIESTA 클러스터에서 설치` 방식으로 빌드한 경우
-
-클러스터 튜토리얼에는 보통 `slm_siesta_run` 같은 제출 스크립트가 함께 들어 있다.
-
-```bash
-$ cd Tutorial/bin
-$ ls
-$ gedit slm_siesta_run
-```
-해당 스크립트에서 실제 siesta가 위치해 있는 위치 혹은 해당 bin에 있는 siesta 경로로 수정해준다.
-```bash
-...
-RUNBIN="(siesta가 실제 있는 위치)"
-...
-```
-계산 방법 예시:  
-계산 하고자 하는 디렉토리에 실행 스크립트를 복사한 뒤 job을 제출한다.
-
-```bash
-$ cp ../../bin/slm_siesta_run .
-$ ls
-$ qsub slm_siesta_run
-```
-
-이 문서의 예시는 대부분 `qsub slm_siesta_run` 기준으로 적혀 있다.  
-Edison 환경에서 진행한다면 같은 자리에서 `python ../bin/run_siesta.py`로 바꿔 실행하면 된다.
 
 ## 2. 분자 계산 개요 및 실습 목표
 
@@ -133,7 +133,7 @@ SIESTA 계산에는 일반적으로 다음 파일들이 필요하다.
 
 원하는 분자 구조는 Materials Project 같은 외부 데이터베이스에서 받아 `fdf` 형식으로 변환해 사용할 수 있다.
 
-![materials-project](/siesta/img/ch4-h20-nh3-03.png){: style="display:block; height:300px; margin-left:auto; margin-right:auto;" }
+![materials-project](../../siesta/img/ch4-h20-nh3-03.png){: style="display:block; height:300px; margin-left:auto; margin-right:auto;" }
 
 #### 3.2.1 `POSCAR` 파일을 받은 경우
 
@@ -287,7 +287,6 @@ $ fdf2xcrysden.py STRUCT.fdf
 
 #### 4.1.1 CH4 분자 구조 확인
 
-튜토리얼에 포함된 `STRUCT.fdf`는 이미 최적화가 끝난 구조일 수 있다.  
 이번 실습에서는 일부러 약간 어긋난 구조를 넣고, 구조 최적화를 통해 올바른 형태로 돌아가는지 확인해 본다.
 
 $CH_4$는 네 개의 C-H 결합 길이가 모두 같아야 하는 대표적인 분자다.  
@@ -417,7 +416,7 @@ $ cd output
 $ xyz2xcrysden.py Test.xyz
 ```
 
-![03_010](/siesta/img/ch4-h20-nh3-09.png){: style="display:block; height:800px; margin-left:auto; margin-right:auto;" }
+![03_010](../../siesta/img/ch4-h20-nh3-09.png){: style="display:block; height:800px; margin-left:auto; margin-right:auto;" }
 
 입력 구조에서는 결합 길이가 약 `0.001 Ang` 정도 차이 났지만, 최적화 후에는 차이가 더 작아진다.  
 즉, 구조 최적화를 통해 $CH_4$에 더 적절한 대칭 구조로 수렴했음을 확인할 수 있다.
@@ -436,7 +435,7 @@ $ gedit BASIS.fdf # or vi BASIS.fdf
 
 아래 그림의 `PAO.BasisSize` 항목을 `SZ`, `DZ`, `TZ`, `DZP`, `DZDP` 등으로 바꿔 테스트한다.
 
-![03_014](/siesta/img/ch4-h20-nh3-10.jpg){: style="display:block; height:100px; margin-left:auto; margin-right:auto;" }
+![03_014](../../siesta/img/ch4-h20-nh3-10.jpg){: style="display:block; height:100px; margin-left:auto; margin-right:auto;" }
 
 계산이 끝나면 각 basis에서 얻은 결합 길이와 결합각을 비교하고, 문헌값과도 함께 비교해 본다.
 
@@ -444,7 +443,7 @@ Reference: Handy, Nicholas C., Christopher W. Murray, and Roger D. Amos,
 "Study of methane, acetylene, ethene, and benzene using Kohn-Sham theory."  
 The Journal of Physical Chemistry 97.17 (1993): 4392-4396.
 
-![03_015](/siesta/img/ch4-h20-nh3-11.jpg){: style="display:block; height:250px; margin-left:auto; margin-right:auto;" }
+![03_015](../../siesta/img/ch4-h20-nh3-11.jpg){: style="display:block; height:250px; margin-left:auto; margin-right:auto;" }
 
 |  | SZ | DZ | TZ | DZP | DZDP |
 | --- | --- | --- | --- | --- | --- |
@@ -486,7 +485,7 @@ $ ase gui opt.xyz
 여기서는 `H2O.ANI`를 복사해 `opt.xyz`라는 이름으로 열었다.  
 이 파일을 보면 최적화 과정에서 원자가 step마다 어떻게 움직였는지 확인할 수 있다.
 
-![03_016](/siesta/img/ch4-h20-nh3-13.png){: style="display:block; height:250px; margin-left:auto; margin-right:auto;" }
+![03_016](../../siesta/img/ch4-h20-nh3-13.png){: style="display:block; height:250px; margin-left:auto; margin-right:auto;" }
 
 #### 4.2.2 H2O 전자 밀도 확인
 
@@ -501,7 +500,7 @@ $ rho2xsf < input_rho2xsf.txt
 
 `input_rho2xsf.txt` 안에는 현재 계산 파일 이름과 맞아야 하는 항목이 있을 수 있으므로, 실행 전에 한 번 열어서 확인하는 편이 안전하다.
 
-![03_017](/siesta/img/ch4-h20-nh3-14.png){: style="display:block; height:250px; margin-left:auto; margin-right:auto;" }
+![03_017](../../siesta/img/ch4-h20-nh3-14.png){: style="display:block; height:250px; margin-left:auto; margin-right:auto;" }
 
 `rho2xsf` 실행이 끝나면 `H2O.XSF`와 같은 시각화용 파일이 생성된다.  
 이 파일을 로컬로 옮겨 `VESTA`에서 열면 $H_2O$의 전자 밀도를 볼 수 있다.
@@ -512,7 +511,7 @@ VESTA에서 단면을 확인하는 한 가지 방법은 다음과 같다.
 2. `New`를 누르고 `Calculate the best plane...`를 선택한 뒤 `Apply`를 누른다.
 3. 하단의 `Properties`에서 `Section` 항목으로 들어가 `isosurface level`을 `Max: 0.02`, `Min: -0.02`로 설정한다.
 
-![03_018](/siesta/img/ch4-h20-nh3-15.png){: style="display:block; height:250px; margin-left:auto; margin-right:auto;" }
+![03_018](../../siesta/img/ch4-h20-nh3-15.png){: style="display:block; height:250px; margin-left:auto; margin-right:auto;" }
 
 ### 4.3 NH3 개별 실습 과제
 
