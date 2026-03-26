@@ -1,170 +1,169 @@
-Windows subsystem for Linux
-====================================
-## Contents
-1. WSL2 installation
-2. X11 server installation
-3. Anaconda installation
+# 1-B. 개인 사용자 환경 (Windows/Unix)
 
-## 1. WSL2 installation
+이 문서는 개인 PC에서 연구실 실습을 진행할 수 있도록 **터미널 기반 개발 환경을 준비**하는 문서입니다.
 
-2020년 05월 windows 10 update를 통해 **Windows subsystem for Linux 2 (WSL2)**가 정식 설치가 가능해졌습니다. **WSL2**를 이용하면 Windows 10 환경에서 Linux 를 구동할 수 있고 구축된 Linux 환경에서 **Ubuntu**를 설치하여 python code 개발 통합환경인 **Anaconda**를 설치할 수 있습니다. 우선 아래 링크를 참조하여 **WSL2** 및 **Ubuntu** 설치를 진행합니다.
+핵심 목표:
 
-WSL2 installation: [[Link]](https://docs.microsoft.com/en-us/windows/wsl/install-win10) 
+1. 내 운영체제(Windows/macOS/Linux)에서 어떤 방식으로 Linux 명령어를 사용할지 결정
+2. VS Code + Terminal + SSH 기반의 공통 작업 흐름을 준비
+3. 준비가 끝나면 1-C(리눅스 기초) 또는 2-A(HPC 접속)로 자연스럽게 이동
 
-`Error: 0x8037012` Error: [[Link]](https://stackoverflow.com/questions/62340566/fix-wslregisterdistribution-failed-with-error-0x80370102)
+---
 
-## 2. X11 server (visualization)
+## 0. 이 문서를 꼭 봐야 하나?
 
-가상머신에서 시각화를 위해서 GUI 프로그램인 **VcXsrv**를 설치하도록 합니다: [[Link]](https://sourceforge.net/projects/vcxsrv/)
+아래 조건을 만족하면 **1-B를 생략하고 2-A(SSH 접속)로 바로 이동**할 수 있습니다.
 
-설치 후에 생성된 **Xlaunch**를 실행하고 아래와 같은 설정을 입력합니다.
+- 이미 터미널 사용이 익숙함
+- SSH 접속 경험이 있음 (`ssh user@host`)
+- VS Code + Remote-SSH 또는 일반 SSH 클라이언트 사용 가능
 
-![img/Jupyter/Untitled%201.png](../../getting-started/img/wsl-01.png)
+즉, WSL 설치는 모든 사용자 필수 단계가 아닙니다.
 
-![img/Jupyter/Untitled%202.png](../../getting-started/img/wsl-02.png)
+---
 
-![img/Jupyter/Untitled%203.png](../../getting-started/img/wsl-03.png)
+## 1. 어떤 로컬 환경을 선택할까? (결정 가이드)
 
-설정을 완료하면 백그라운드에 **Xlaunch**가 실행됩니다. 이를 확인하고 **Ubuntu** terminal에서 GUI가 제대로 작동하는지 확인하기 위해 **xeyes**를 실행시켜 봅니다. 우선 **x11** 프로그램을 **Ubuntu** 환경에 설치하겠습니다.
+### 1.1 Windows 사용자
 
-```bash
-apt-get install x11-apps
+- Linux 명령어를 로컬에서 직접 연습하고 싶다 → **WSL2 + Ubuntu 권장**
+- 로컬 Linux는 필요 없고 원격 서버(SSH)만 쓸 계획이다 → WSL 생략 가능
+
+### 1.2 macOS/Linux(Unix) 사용자
+
+- 이미 POSIX 계열 터미널 환경을 기본 제공
+- 별도 WSL 불필요
+- Terminal/iTerm2(맥) 또는 기본 Terminal(리눅스)로 바로 진행 가능
+
+---
+
+## 2. 공통 준비: VS Code 먼저 설치
+
+VS Code는 이후 문서(2-A)에서 원격 서버 편집/실행의 중심 도구로 사용됩니다.
+
+### 2.1 설치
+
+- 다운로드: <https://code.visualstudio.com/download>
+
+### 2.2 권장 확장
+
+- **Remote - SSH**: HPC 원격 접속
+- **Python**: Python 코드 편집/실행 지원
+- (선택) **Jupyter**: 노트북 작업
+
+### 2.3 초기 점검
+
+- VS Code 실행 가능
+- 확장 설치 완료
+- 터미널(`Ctrl+``) 열리는지 확인
+
+---
+
+## 3. Windows: WSL2 + Ubuntu 설치 (권장 경로)
+
+### 3.1 설치
+
+PowerShell(관리자 권한):
+
+```powershell
+wsl --install
 ```
 
-설치가 완료되면 다음과 같은 명령어를 시도해봅니다.
+설치 후 재부팅, Ubuntu 실행, 사용자 계정 생성.
 
-```bash
-xeyes
+### 3.2 버전/상태 확인
+
+PowerShell:
+
+```powershell
+wsl --status
+wsl -l -v
 ```
 
-정상적으로 설치가 진행이 되었다면 다음과 같은 프로그램이 실행되는 것을 확인할 수 있습니다.
+권장 상태:
 
-![img/Jupyter/Untitled%204.png](../../getting-started/img/wsl-04.png)
+- 기본 버전: WSL2
+- Ubuntu 배포판: Running/Stopped 정상 표시
 
-그러나 xeyes가 실행되지 않는다면 다음과 같은 조치를 취합니다.
+### 3.3 Ubuntu 터미널 기본 점검
 
 ```bash
-vi ~/.bashrc
+uname -a
+whoami
+pwd
+ls
 ```
 
-위 명령어를 구동하면 vim 에디터를 실행되며 `bashrc`의 코드가 확인할 수 있습니다. `bashrc`에는 bash 환경이 처음 실행될때 자동으로 동작되는 명령어들이 작성되어있습니다. 이의 마지막 줄에 아래의 코드를 추가합니다. 이에 대한 자세한 방법은 아래과 같습니다. (기본적인 vim 에디터 사용법 [[Link]](https://devhints.io/vim)).
-
-- `i` 를 통해 입력 모드로 전환
-- 방향키를 통해 코드를 추가할 맨 아래줄로 이동
-- 아래 코드작성
+### 3.4 권장 업데이트
 
 ```bash
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-```
-
-- `Esc` 를 통해 명령어 모드로 전환
-- `:wq` 를 통해 저장 후 종료
-
-마지막으로 아래 명령어를 통해 설정한 `bashrc` 파일을 bash 환경에 동기화시켜주도록 하고 다시 **xeyes**가 작동하는지 확인합니다.
-
-```bash
-source ~/.bashrc
-```
-
-## 3. Anaconda installation on Linux environment
-
-우선 Anaconda 설치용 shell script를 설치합니다: [[Link]](https://www.anaconda.com/distribution/#download-section)
-
-![img/Jupyter/Untitled%205.png](../../getting-started/img/wsl-05.png)
-
-설치된 파일[e.g. 2021년 2월 17일 기준 최신버젼: `Anaconda3-2020.11-Linux-x86_64.sh`]을 `c:` 드라이브의 기본 위치에 옮기고 **Ubuntu**를 실행합니다(. 다음과 같은 명령어를 통해 설치한 파일을 **Linux** 환경에 복사하도록 합니다. 
-
-```bash
-cp /mnt/c/Anaconda3-2020.11-Linux-x86_64.sh ~/.
-```
-
-이제 아래와 같이 bash shell 에서 `ls` 를 치면 `Anaconda3-2020.11-Linux-x86_64.sh`  파일이 해당 경로로 이동했음을 확인할 수 있습니다. 다음 명령어를 통해 설치 파일을 실행시킵니다.
-
-```bash
-bash Anaconda3-2020.11-Linux-x86_64.sh
-```
-
-라이센스 서약을 `Enter` 를 통해 읽고 `yes` 를 입력하여 다음으로 진행:
-
-![img/Jupyter/Untitled%206.png](../../getting-started/img/wsl-06.png)
-
-`Enter` 를 입력하여 **Anaconda3** 설치 위치 설정:
-
-![img/Jupyter/Untitled%207.png](../../getting-started/img/wsl-07.png)
-
-설치 진행이 완료되면 다음과 같은 명령어를 통해 **Anaconda3**가 제대로 설치된 것을 확인 할 수 있습니다.
-
-```bash
-anaconda-navigator
-```
-
-![img/Jupyter/Untitled%208.png](../../getting-started/img/wsl-08.png)
-
-
-
-### Text editor: Emacs installation
-
-Unix 환경에서 유용한 text editor인 emacs를 설치합니다:
-
-```bash
-sudo add-apt-repository ppa:kelleyk/emacs
-sudo apt update
-sudo apt install emacs26
-```
-
-How to use Emacs: [[Link]](https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf)
-
-
-### Run Jupyter notebook
-
-Python 코드를 실행해볼 수 있는 **Jupyter notebook**를 원격 브라우저 환경에서 실행시기키 위해서는 다음과 같은 방법을 따릅니다.
-
-
-### Firefox browser installation
-
-```bash
-sudo add-apt-repository ppa:ubuntu-mozilla-security/ppa
 sudo apt-get update
-sudo apt-get install firefox
+sudo apt-get upgrade -y
 ```
 
-Firefox browser가 설치된 이후에서는 **Jupyter notebook**의 설정에서 browser의 경로를 지정해주어야 한다.
+### 3.5 자주 만나는 오류 참고
+
+- 공식 설치 가이드: <https://learn.microsoft.com/windows/wsl/install>
+- `0x80370102` 오류 참고: <https://stackoverflow.com/questions/62340566/fix-wslregisterdistribution-failed-with-error-0x80370102>
+
+---
+
+## 4. Unix(macOS/Linux) 사용자 가이드
+
+“iTerm 쓰면 끝” 수준을 넘어서, 실제 SSH/HPC 작업에 필요한 최소 점검 항목을 아래에 정리합니다.
+
+### 4.1 터미널/쉘 점검
 
 ```bash
+echo $SHELL
+which ssh
+ssh -V
+```
+
+### 4.2 홈 디렉터리/권한 감각 점검
+
+```bash
+pwd
 cd ~
-jupyter-notebook --generate-config
-cd .jupyter
-emacs jupyter_notebook_config.py &
+pwd
+ls -al
 ```
 
-Emacs 에디터가 열리면 `/c.NotebookApp.browser` 을 입력하여 관련 키워드를 검색합니다.
+### 4.3 SSH 키 생성(권장)
 
-
-발견된 위치에 해당하는 코드의 줄을 다음과 같이 수정합니다(주석 문자 `#` 지움). 
-
-```python
-c.NotebookApp.browser = '/usr/bin/firefox %s'
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-이를 통해서  **Jupyter notebook**가 실행될 때 자동으로 Firefox browser를 통해 실행될 수 있게 합니다.
+- 기본 경로(`~/.ssh/id_ed25519`) 사용 권장
+- passphrase 설정 권장
 
+### 4.4 macOS 추가 팁
 
-### (Optional: not using the remote browser)
+- 기본 Terminal도 충분하지만, iTerm2를 쓰면 탭/분할/검색이 편리함
+- X11 GUI가 필요하면 XQuartz 설치 후 [2-B. X11 forwarding](./x11-forwarding.md) 진행
 
-위의 옵션을 수정하는 대신 `/c.NotebookApp.open_browser` 을 입력하여 관련 키워드를 검색합니다. 발견된 위치에 해당하는 코드의 줄을 다음과 같이 수정합니다(주석 문자 `#` 지움).  이를 통해서  **Jupyter notebook**가 실행될 때 자동으로 브라우저를 실행하지 않도록 할 수 있습니다.
+---
 
-```python
-c.NotebookApp.open_browser = False
-```
+## 5. 문서 역할 분리 (중요)
 
-이제 다음과 같은 명령어를 통해 **Jupyter notebook**를 실행시킵니다.
+이 문서는 **개인 환경 준비**만 다룹니다.
 
-```python
-jupyter notebook
-```
+- X11 forwarding 상세 설정 → [2-B. X11 forwarding](./x11-forwarding.md)
+- Conda/Python/Jupyter 상세 설정 → [1-D. 파이썬 패키지 관리](./python-setup.md)
 
-**(Optional: not using the remote browser)**의 방법을 사용한 경우는 아래와 같이 나타난 URLs 정보를 복사하여 자신의 브라우저 환경에 입력하면 **Jupyter notebook**에 접근할 수 있습니다.
+---
 
-![img/Jupyter/Untitled%2010.png](../../getting-started/img/wsl-09.png)
+## 6. 다음 단계 추천
 
-![img/Jupyter/Untitled%2011.png](../../getting-started/img/wsl-10.png)
+### 6.1 리눅스 명령어가 익숙하지 않다면
+
+- [1-C. 리눅스 기초 사용법](./linux-tutorial.md)
+
+### 6.2 바로 서버 접속부터 하고 싶다면
+
+- [2-A. SSH를 통한 클러스터 환경(HPC) 접속](./lab-cluster.md)
+
+### 6.3 Python 실행 환경까지 먼저 만들고 싶다면
+
+- [1-D. 파이썬 패키지 관리 (Anaconda)](./python-setup.md)
