@@ -1,3 +1,6 @@
+> 안내: 이미 Linux/macOS 터미널과 SSH 사용이 가능한 사용자는 `1-B (개인 사용자 환경/WSL)`를 건너뛰고 이 문서(2-A)로 바로 진행할 수 있습니다.
+> WSL 설치는 Windows 사용자 중 로컬 Linux 환경이 필요한 경우에만 필수입니다.
+
 0.1. YHKimLab 고성능계산(high-performance computing, HPC) 클러스터 사용하기
 ---
 
