@@ -36,11 +36,12 @@ nav:
         - 시작하기:
                 - 1. 리눅스:
                         - A. 리눅스 환경 개요 : getting-started/linux-introduction.md
-                        - B. 리국스 기초 사용법 : getting-started/linux-tutorial.md
+                        - B. 개인 사용자 환경 (Window/Unix) : getting-started/wsl.md
+                        - C. 리눅스 기초 사용법 : getting-started/linux-tutorial.md 
+                        - D. 파이썬 패키지 관리 (Anaconda) : getting-started/python-setup.md
                 - 2. 원격 개발 환경 구축:
-                        - A. 연구실 클러스터 환경 (HPC) : getting-started/lab-cluster.md
-                        - C. 개인 사용자 환경 (WSL or Unix) : getting-started/wsl.md
-                        - B. 파이썬 패키지 관리 (Anaconda) : getting-started/python-setup.md
+                        - A. SSH를 통한 클러스터 환경(HPC) 접속  : getting-started/lab-cluster.md 
+                        - B. X11 forwarding : getting-started/lab-cluster.md 
                 - 3. 버전관리:
                         - A. 깃 저장소 시작하기 : getting-started/git-create-repository.md
                 - 4. 명령어 cheat sheet:
