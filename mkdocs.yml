@@ -34,13 +34,16 @@ validation:
 nav:
         - Home: index.md
         - 시작하기:
-                - 1. 원격 개발 환경 구축:
-                        - A. 연구실 클러스터 (HPC) : getting-started/lab-cluster.md
-                        - B. 로컬 Python (Anaconda) : getting-started/python-setup.md
-                        - C. WSL : getting-started/wsl.md
-                - 2. 버전관리:
-                        - A. Git 저장소 시작하기 : getting-started/git-create-repository.md
-                - 3. 명령어 cheat sheet:
+                - 1. 리눅스:
+                        - A. 리눅스 환경 개요 : getting-started/linux-introduction.md
+                        - B. 리국스 기초 사용법 : getting-started/linux-tutorial.md
+                - 2. 원격 개발 환경 구축:
+                        - A. 연구실 클러스터 환경 (HPC) : getting-started/lab-cluster.md
+                        - C. 개인 사용자 환경 (WSL or Unix) : getting-started/wsl.md
+                        - B. 파이썬 패키지 관리 (Anaconda) : getting-started/python-setup.md
+                - 3. 버전관리:
+                        - A. 깃 저장소 시작하기 : getting-started/git-create-repository.md
+                - 4. 명령어 cheat sheet:
                         - A. Python : cheatsheets/python.md
                         - B. Linux : cheatsheets/linux.md
                         - C. Anaconda : cheatsheets/anaconda.md
@@ -55,18 +58,18 @@ nav:
                                 - '(1) 모든-전자 계산' : atom/all-electron.md
                                 - '(2) 슈도퍼텐셜 생성' : atom/pseudopotential.md
         - SIESTA:
-                - 0. 준비:
+                - 1. 준비:
                         - A. SIESTA 클러스터에서 설치 : installation/siesta-cluster.md
                         - B. SIESTA Edison에서 설치 : installation/siesta-edison.md
                         - C. SIESTA 로컬에서 설치 : installation/siesta-local.md
-                - 1. SIESTA 계산:
+                - 2. SIESTA 계산:
                         - A. 기초 과정:
                                 - (1) SIESTA 개요 : siesta/basic.md
                                 - (2) 분자 계산 실습 (CH4, H2O, NH3) : siesta/ch4-h20-nh3.md
                                 - (3) 3D - Au bulk 구조 : siesta/gold-bulk.md
                                 - (4-1) 2D - Au slab 구조: siesta/gold-slab.md
                                 - (4-2) 2D - Graphene : siesta/graphene.md
-                - 2. TranSIESTA 계산:
+                - 3. TranSIESTA 계산:
                         - A. 기초 과정:
                                 - (1) TranSIESTA 개요 : transiesta/overview.md
                                 - (2) 접합구조 모델링 : transiesta/junction-modeling.md
